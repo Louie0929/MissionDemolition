@@ -83,7 +83,7 @@ public class ProjectileLine : MonoBehaviour
         } // end else
     } // end addPoint
 
-    public Vector3 lastPoint()
+    public Vector3 lastPoint
     {
         get
         {
@@ -95,6 +95,34 @@ public class ProjectileLine : MonoBehaviour
         } // end get
     }
     // Start is called before the first frame update
+
+    void FixedUpdate()
+    {
+        if (poi == null)
+        {
+            if (FollowCam.POI != null)
+            {
+                if (FollowCam.POI.tag == "Projectile")
+                {
+                    poi = FollowCam.POI;
+                } // end if
+                else
+                {
+                    return; // return if we didn't find a poi
+                } // end else
+            } // end if
+            else
+            {
+                return; // return if we didn't find a poi
+            }
+        } // end if
+
+        AddPoint();
+        if (FollowCam.POI == null)
+        {
+            poi = null;
+        }
+    } // end fixedupdate
     void Start()
     {
         
